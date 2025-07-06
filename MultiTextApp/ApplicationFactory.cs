@@ -22,7 +22,7 @@ namespace MultiTextApp
             var presenter = new MainPresenter(view, model, fileService);
 
             // コンストラクタで渡す
-            return new MainForm(presenter);
+            return new MainForm();
         }
     }
 }

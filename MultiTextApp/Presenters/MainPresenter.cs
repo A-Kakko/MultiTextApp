@@ -48,6 +48,7 @@ namespace MultiTextApp.Presenters
         // ファイルを開く
         private void OnOpenFile()
         {
+            MessageBox.Show("OnOpenFile called!"); // これが表示されるか確認
             if (!CheckUnsavedChanges()) return;
 
             var formats = _model.GetSupportedFormats();

@@ -42,15 +42,16 @@ namespace MultiTextApp.Views
         public MainForm()
         {
             InitializeComponent();
-            textBox1.TextChanged += (s, e) => TextContentChanged?.Invoke();
             this.FormClosing += MainForm_FormClosing;
         }
 
 
-        internal MainForm(MainPresenter presenter) : this()
+        internal void Initialize(MainPresenter presenter)
         {
-            _presenter = presenter;
+            _presenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
         }
+
+
 
 
         public (bool success, string filePath, IFileFormat format) ShowOpenFileDialog(List<IFileFormat> formats)
@@ -158,11 +159,6 @@ namespace MultiTextApp.Views
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             TextContentChanged?.Invoke();
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
         }
     }
 }
