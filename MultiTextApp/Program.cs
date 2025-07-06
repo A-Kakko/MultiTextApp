@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MultiTextApp.Views;
+using MultiTextApp.Models;
+using MultiTextApp.Interfaces;
+using MultiTextApp.Presenters;
 
 namespace MultiTextApp
 {
@@ -16,7 +20,7 @@ namespace MultiTextApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }
