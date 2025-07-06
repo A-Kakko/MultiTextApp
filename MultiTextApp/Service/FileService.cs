@@ -80,5 +80,19 @@ namespace MultiTextApp.Services
                 return null;
             }
         }
+
+        public string ReadFile(string filePath)
+        {
+            try
+            {
+                return File.ReadAllText(filePath);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show($"ファイルを読み込めませんでした。\n{ex.Message}",
+                              "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
     }
 }

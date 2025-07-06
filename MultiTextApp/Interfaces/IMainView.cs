@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MultiTextApp.Interfaces;
+using MultiTextApp.Presenters;
 
 namespace MultiTextApp.Interfaces
 {
@@ -22,7 +24,7 @@ namespace MultiTextApp.Interfaces
         event Action<System.ComponentModel.CancelEventArgs> FormClosingRequested;
 
         // メソッド
-        void ShowOpenFileDialog(List<IFileFormat> formats, out string filePath, out IFileFormat selectedFormat, out bool result);       // 開くダイアログを表示し、選択されたフォーマットとファイルパスを返す
+        (bool success, string filePath, IFileFormat format) ShowOpenFileDialog(List<IFileFormat> formats); // ファイルを開くダイアログを表示し、選択されたファイルパスとフォーマットを返す
         void ShowSaveFileDialog(List<IFileFormat> formats, out string filePath, out IFileFormat selectedFormat, out bool result);       // 保存ダイアログを表示し、選択されたフォーマットとファイルパスを返す
         void ShowMessage(string message);    // メッセージを表示
         void ShowError(string message);     // エラーメッセージを表示

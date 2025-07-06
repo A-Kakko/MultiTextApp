@@ -15,6 +15,7 @@ namespace MultiTextApp.Interfaces
 
         void CreateNew();
         void LoadFromFile(string filePath, IFileFormat format);
+        void LoadContent(string content,string filePath, IFileFormat format);
         void SaveToFile(string filePath, IFileFormat format);
         string GetFileName();
         List<IFileFormat> GetSupportedFormats();

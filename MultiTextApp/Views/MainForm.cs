@@ -16,7 +16,7 @@ namespace MultiTextApp.Views
 {
     public partial class MainForm : Form, IMainView
     {
-        private readonly MainPresenter _presenter;
+        private MainPresenter _presenter;
 
         // テキストボックスの内容を取得・設定するプロパティ
         public string DocumentText
@@ -42,35 +42,30 @@ namespace MultiTextApp.Views
         public MainForm()
         {
             InitializeComponent();
-
             textBox1.TextChanged += (s, e) => TextContentChanged?.Invoke();
-
-            // DI: MainPresenter を初期化
-            DocumentModel model = new DocumentModel();  
-            model.SetDefaultFormat(new TxtFormat()); // デフォルトのフォーマットを設定
-            _presenter = new MainPresenter(this, model);
-
-            // フォーム終了イベントの設定
             this.FormClosing += MainForm_FormClosing;
         }
 
-        public void ShowOpenFileDialog(List<IFileFormat> formats, out string filePath, out IFileFormat selectedFormat, out bool result)
+
+        internal MainForm(MainPresenter presenter) : this()
         {
-            using (OpenFileDialog dialog = new OpenFileDialog())
+            _presenter = presenter;
+        }
+
+
+        public (bool success, string filePath, IFileFormat format) ShowOpenFileDialog(List<IFileFormat> formats)
+        {
+            using (var dialog = new OpenFileDialog())
             {
                 dialog.Filter = CreateFileFilter(formats);
-                result = dialog.ShowDialog() == DialogResult.OK;
 
-                if (result)
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    filePath = dialog.FileName;
-                    selectedFormat = GetFormatFromFilterIndex(formats, dialog.FilterIndex - 1);
+                    var selectedFormat = GetFormatFromFilterIndex(formats, dialog.FilterIndex - 1);
+                    return (true, dialog.FileName, selectedFormat);
                 }
-                else
-                {
-                    filePath = "";
-                    selectedFormat = null;
-                }
+
+                return (false, "", null);
             }
         }
 
@@ -165,5 +160,9 @@ namespace MultiTextApp.Views
             TextContentChanged?.Invoke();
         }
 
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

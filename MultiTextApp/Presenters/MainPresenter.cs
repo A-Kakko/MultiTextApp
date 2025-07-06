@@ -1,11 +1,14 @@
 ﻿using MultiTextApp.Interfaces;
+using MultiTextApp.Services;
 using MultiTextApp.Models;
 using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace MultiTextApp.Presenters
 {
@@ -13,13 +16,14 @@ namespace MultiTextApp.Presenters
     {
         private readonly IMainView _view;
         private readonly IDocumentModel _model;
+        private readonly IFileService _fileService;
 
         // DI：両方とも外から注入
-        public MainPresenter(IMainView view, IDocumentModel model)
+        public MainPresenter(IMainView view, IDocumentModel model, IFileService fileService)
         {
             _view = view;
             _model = model;
-
+            _fileService = fileService;
 
             // イベントハンドラの登録
             _view.NewFileRequested += OnNewFile;
@@ -45,21 +49,25 @@ namespace MultiTextApp.Presenters
         private void OnOpenFile()
         {
             if (!CheckUnsavedChanges()) return;
-            
-            _view.ShowOpenFileDialog(_model.GetSupportedFormats(), out string filePath, out IFileFormat selectedFormat, out bool result);
-            if (result)
+
+            var formats = _model.GetSupportedFormats();
+            var result = _view.ShowOpenFileDialog(formats);
+
+            if (result.success)
             {
                 try
                 {
-                    _model.LoadFromFile(filePath, selectedFormat);
+                    string content = _fileService.ReadFile(result.filePath);
+                    _model.LoadContent(content, result.filePath, result.format);
                     UpdateView();
                 }
                 catch (Exception ex)
                 {
-                    _view.ShowError($"ファイルの読み込みに失敗しました: {ex.Message}");
+                    _view.ShowError($"エラー: {ex.Message}");
                 }
             }
         }
+
 
         // 上書き保存
         private void OnSaveFile()
@@ -152,5 +160,7 @@ namespace MultiTextApp.Presenters
             string modifiedMark = _model.IsModified ? "*" : "";
             _view.WindowTitle = $"{_model.GetFileName()}{(_model.IsModified ? "*" : "")} - MultiTextApp";
         }
+
+
     }
 }

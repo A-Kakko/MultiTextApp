@@ -63,10 +63,15 @@ namespace MultiTextApp.Models
         // ファイルから読み込み
         public void LoadFromFile(string filePath, IFileFormat format)
         {
-            // ファイルからコンテンツを読み込み、プロパティに設定
-            string fileContent = System.IO.File.ReadAllText(filePath, Encoding.UTF8);
-            _content = format.Decode(System.IO.File.ReadAllText(filePath));
-            _originalContent = _content; // 元のコンテンツを保存
+            string fileContent = File.ReadAllText(filePath, Encoding.UTF8);
+            LoadContent(fileContent, filePath, format);
+        }
+
+        public void LoadContent(string content, string filePath, IFileFormat format)
+        {
+            // コンテンツを直接設定
+            _content = content;
+            _originalContent = content; // 元のコンテンツを保存
             FilePath = filePath;
             IsModified = false;
             CurrentFormat = format;
@@ -108,5 +113,6 @@ namespace MultiTextApp.Models
                 CurrentFormat = defaultFormat; // 初期状態ではデフォルトフォーマットを使用
             }
         }
+
     }
 }

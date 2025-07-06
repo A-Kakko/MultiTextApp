@@ -27,5 +27,11 @@ namespace MultiTextApp.Interfaces
         /// <param name="content">保存する内容</param>
         /// <returns>保存されたファイルパス。キャンセルされた場合はnull</returns>
         string SaveFileAs(string content);
+
+        /// <summary>
+        /// // ファイルを読み込む
+        /// </summary>
+        /// <param name="filePath">読み込むファイルのパス</param> "
+        string ReadFile(string filePath);
     }
 }
