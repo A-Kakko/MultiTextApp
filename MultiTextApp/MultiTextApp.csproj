@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IDocumentModel.cs" />
+    <Compile Include="Interfaces\IDocumentService.cs" />
     <Compile Include="Interfaces\IFileFormat.cs" />
+    <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IMainView.cs" />
     <Compile Include="Models\DocumentModel.cs" />
     <Compile Include="Models\TxtFormat.cs" />
