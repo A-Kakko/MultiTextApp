@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace MultiTextApp.Interfaces
 {
-    internal interface IDocumentModel
+    public interface IDocumentModel
     {
         string Content { get; set; }
+        string FilePath { get; set; }
+        bool IsModified { get; set; }
+        IFileFormat CurrentFormat { get; set; }
+
         void CreateNew();
+        void LoadFromFile(string filePath, IFileFormat format);
+        void SaveToFile(string filePath, IFileFormat format);
+        string GetFileName();
+        List<IFileFormat> GetSupportedFormats();
+        void SetDefaultFormat(IFileFormat defaultFormat);
     }
 }
