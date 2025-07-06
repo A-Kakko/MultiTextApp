@@ -28,6 +28,7 @@ namespace MultiTextApp.Presenters
             _view.SaveAsFileRequested += OnSaveAsFile;
             _view.ExitRequested += OnExit;
             _view.FormClosingRequested += OnFormClosing;
+            _view.TextContentChanged += OnTextContentChanged;
 
             UpdateView();
         }
@@ -122,7 +123,6 @@ namespace MultiTextApp.Presenters
         private bool CheckUnsavedChanges()
         {
             _model.Content = _view.DocumentText; // 最新内容を反映
-            _model.IsModified = true; // とりあえず変更ありとする（後で改善）
 
             if (_model.IsModified)
             {
@@ -139,11 +139,17 @@ namespace MultiTextApp.Presenters
             return true; // 変更なし、または破棄
         }
 
-
+        private void OnTextContentChanged()
+        {
+            _model.Content = _view.DocumentText; // Viewから最新テキストを取得
+            UpdateView();
+        }
 
         private void UpdateView()
         {
             _view.DocumentText = _model.Content;
+
+            string modifiedMark = _model.IsModified ? "*" : "";
             _view.WindowTitle = $"{_model.GetFileName()}{(_model.IsModified ? "*" : "")} - MultiTextApp";
         }
     }

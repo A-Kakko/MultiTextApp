@@ -18,6 +18,7 @@ namespace MultiTextApp.Interfaces
         event Action SaveFileRequested;
         event Action SaveAsFileRequested;
         event Action ExitRequested;
+        event Action TextContentChanged;
         event Action<System.ComponentModel.CancelEventArgs> FormClosingRequested;
 
         // メソッド

@@ -37,10 +37,13 @@ namespace MultiTextApp.Views
         public event Action SaveAsFileRequested;    
         public event Action ExitRequested;
         public event Action<CancelEventArgs> FormClosingRequested;
+        public event Action TextContentChanged;
 
         public MainForm()
         {
             InitializeComponent();
+
+            textBox1.TextChanged += (s, e) => TextContentChanged?.Invoke();
 
             // DI: MainPresenter を初期化
             DocumentModel model = new DocumentModel();  
@@ -155,6 +158,11 @@ namespace MultiTextApp.Views
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             FormClosingRequested?.Invoke(e);
+        }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            TextContentChanged?.Invoke();
         }
 
     }

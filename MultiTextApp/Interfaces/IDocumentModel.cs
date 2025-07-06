@@ -10,7 +10,7 @@ namespace MultiTextApp.Interfaces
     {
         string Content { get; set; }
         string FilePath { get; set; }
-        bool IsModified { get; set; }
+        bool IsModified { get;}
         IFileFormat CurrentFormat { get; set; }
 
         void CreateNew();
