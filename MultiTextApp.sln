@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTextApp", "MultiTextApp\MultiTextApp.csproj", "{A5F86BA5-82D2-4A41-8D78-83748F6E467B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5F86BA5-82D2-4A41-8D78-83748F6E467B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F86BA5-82D2-4A41-8D78-83748F6E467B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F86BA5-82D2-4A41-8D78-83748F6E467B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F86BA5-82D2-4A41-8D78-83748F6E467B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF92217E-BB52-4CF3-8B6F-C1E9D47D2DD1}
+	EndGlobalSection
+EndGlobal
